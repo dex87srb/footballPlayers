@@ -1,3 +1,6 @@
+/*Nisam uradio random postavu prilikom reload-a, jer ako ubacim random(), koliko puta ce se izvrteti petlja dok
+dok ne ubaci 11 razlicitih igraca...tacnije koja je verovatnoca da ce funkcija za koliko vremena izvrsiti popunu... */
+
 var teamData = {
   name: "",
   logo: "images/1200px-Manchester_United_FC_crest.jpg",
@@ -147,6 +150,7 @@ var subPlayers;
 
 var nameIDpitch;
 var nameIDsub;
+var randomIDpitch;
 
 var players = function (team) {
   headerImg = document.createElement("img");
@@ -295,7 +299,7 @@ var players = function (team) {
 
   setInterval(() => {
     swapNodes();
-  }, 1000);
+  }, 60000);
 };
 
 players(teamData);
