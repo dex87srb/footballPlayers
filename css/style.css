@@ -1,0 +1,186 @@
+@font-face {
+  font-family: "changa_one_regular";
+  src: url("../fonts/ChangaOne/changaone-regular-webfont.woff2") format("woff2"),
+    url("../fonts/ChangaOne/ChangaOne-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "butler_medium";
+  src: url("../fonts/Butler_Webfont/Butler-Bold.woff2") format("woff2"),
+    url("../fonts/Butler_Webfont/Butler-Bold.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "handlee";
+  src: url("../fonts/handlee/handlee-regular-webfont.woff2") format("woff2"),
+    url("../fonts/handlee/handlee-regular-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "pettingill_cfbold";
+  src: url("../fonts/PettingillCF-Bold/pettingillcf-bold.woff2") format("woff2"),
+    url("../fonts/PettingillCF-Bold/pettingillcf-bold.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+html {
+  --black: rgba(7, 7, 7, 0.7);
+  --background-black: rgb(46, 42, 42);
+  --someWhite: rgb(231, 231, 231);
+  --lgt-blue: #3ece69;
+  --drk-blue: #147ec1;
+  --blue: #159ce4;
+}
+
+* {
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: butler_medium, Arial, pettingill_cfbold;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  width: 100%;
+  height: 9em;
+  background-color: var(--background-black);
+}
+
+header img {
+  height: 7em;
+  margin: 0;
+  margin-left: 50px;
+}
+
+main {
+  width: 1200px;
+  max-width: 100%;
+}
+
+.pitch-players,
+.substitution-players {
+  display: flex;
+  width: 100%;
+  padding: 1.2em 1.9em;
+  max-width: 1000px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 1020px) {
+  .pitch-players > .player {
+    flex: 270px;
+    flex-grow: 0;
+  }
+
+  .substitution-players > .player {
+    flex: 270px;
+    flex-grow: 0;
+  }
+}
+
+@media (max-width: 320px) {
+  .pitch-players,
+  .substitution-players {
+    flex-wrap: nowrap;
+    flex-direction: column;
+  }
+  .player {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.substitution-players {
+  border-top: 1px solid rgba(7, 7, 7, 0.2);
+}
+
+.pitch-players > .player {
+  width: 25%;
+}
+
+.substitution-players > .player {
+  width: 25%;
+}
+
+.player {
+  padding: 1em;
+}
+
+.player__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  flex: 0 0 250px;
+  border-radius: 2%;
+  padding-bottom: 0.7em;
+  background: #cec1bb;
+  background: -moz-radial-gradient(
+    center,
+    #cec1bb 0%,
+    #8f94a4 64%,
+    #dbd8ce 100%
+  );
+  background: -webkit-radial-gradient(
+    center,
+    #cec1bb 0%,
+    #8f94a4 64%,
+    #dbd8ce 100%
+  );
+  background: radial-gradient(
+    ellipse at center,
+    #cec1bb 0%,
+    #8f94a4 64%,
+    #dbd8ce 100%
+  );
+  -webkit-box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000,
+    -34px -20px 4px 20px rgba(0, 0, 0, 0.01);
+  box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000,
+    -34px -20px 4px 20px rgba(0, 0, 0, 0.01);
+}
+
+p.name,
+p.lastName,
+p.number,
+p.position,
+p.age {
+  margin-left: 1em;
+}
+
+p.name {
+  margin-top: 1em;
+}
+
+.player__card p {
+  font-size: 14px;
+  opacity: 0.8;
+  line-height: 1.5;
+  padding: 0 3px;
+}
+
+.player__card-img {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 170px;
+  height: 170px;
+  border-bottom: 1px solid rgba(7, 7, 7, 0.2);
+  padding-bottom: 1.2em;
+  margin-top: 0.7em;
+}
+
+.player__card-img img {
+  width: 150px;
+  height: 150px;
+  margin: 0;
+}
