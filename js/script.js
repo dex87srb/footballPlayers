@@ -1,11 +1,9 @@
-/*Nisam uradio random postavu prilikom reload-a, jer ako ubacim random(), koliko puta ce se izvrteti petlja dok
-dok ne ubaci 11 razlicitih igraca...tacnije koja je verovatnoca da ce funkcija za koliko vremena izvrsiti popunu... */
-
 var teamData = {
   name: "",
   logo: "images/1200px-Manchester_United_FC_crest.jpg",
   players: [
     {
+      image: "images/players/david_de_gea.jpg",
       name: "David",
       lastName: "De Gea",
       number: 1,
@@ -13,6 +11,7 @@ var teamData = {
       age: 30,
     },
     {
+      image: "images/players/victor_lindelof.png",
       name: "Victor",
       lastName: "Lindelof",
       number: 2,
@@ -20,6 +19,7 @@ var teamData = {
       age: 26,
     },
     {
+      image: "images/players/eric_baily.png",
       name: "Eric",
       lastName: "Bailly",
       number: 3,
@@ -27,6 +27,7 @@ var teamData = {
       age: 26,
     },
     {
+      image: "images/players/phil_jones.png",
       name: "Phil",
       lastName: "Jones",
       number: 4,
@@ -34,6 +35,7 @@ var teamData = {
       age: 28,
     },
     {
+      image: "images/players/harry_maquire.png",
       name: "Harry",
       lastName: "Maguire",
       number: 5,
@@ -41,6 +43,7 @@ var teamData = {
       age: 27,
     },
     {
+      image: "images/players/luke_shaw.png",
       name: "Luke",
       lastName: "Shaw",
       number: 23,
@@ -48,6 +51,7 @@ var teamData = {
       age: 25,
     },
     {
+      image: "images/players/aaron_wan-bissaka.png",
       name: "Aaron",
       lastName: "Wan-Bissaka",
       number: 29,
@@ -55,6 +59,7 @@ var teamData = {
       age: 23,
     },
     {
+      image: "images/players/paul_pogba.png",
       name: "Paul",
       lastName: "Pogba",
       number: 6,
@@ -62,6 +67,7 @@ var teamData = {
       age: 27,
     },
     {
+      image: "images/players/huan_mata.png",
       name: "Juan",
       lastName: "Mata",
       number: 8,
@@ -69,6 +75,7 @@ var teamData = {
       age: 32,
     },
     {
+      image: "images/players/jesse_lingard.png",
       name: "Jesse",
       lastName: "Lingard",
       number: 14,
@@ -76,6 +83,7 @@ var teamData = {
       age: 28,
     },
     {
+      image: "images/players/andreas_perreira.png",
       name: "Adreas",
       lastName: "Pereira",
       number: 15,
@@ -83,6 +91,7 @@ var teamData = {
       age: 25,
     },
     {
+      image: "images/players/fred.png",
       name: "Fred",
       lastName: "#",
       number: 17,
@@ -90,6 +99,7 @@ var teamData = {
       age: 27,
     },
     {
+      image: "images/players/edison_cavanni.png",
       name: "Edison",
       lastName: "Cavani",
       number: 7,
@@ -97,6 +107,7 @@ var teamData = {
       age: 34,
     },
     {
+      image: "images/players/anthony_martial.png",
       name: "Anthony",
       lastName: "Martial",
       number: 9,
@@ -104,6 +115,7 @@ var teamData = {
       age: 25,
     },
     {
+      image: "images/players/marcus_rashford.png",
       name: "Marcus",
       lastName: "Rashford",
       number: 10,
@@ -114,192 +126,139 @@ var teamData = {
 };
 
 var headerImg;
-var newElementplayer;
-var newElementPlayerCard;
-var newElementPlayerName;
 
-var arrayPlayer = [];
-var arrayPlayerCard = [];
-var arrayPlayerPicture = [];
-var arrayPlayerPictureImg = [];
-var arrayPlayerPictureImgSrc = [
-  "images/players/david_de_gea.jpg",
-  "images/players/victor_lindelof.png",
-  "images/players/eric_baily.png",
-  "images/players/phil_jones.png",
-  "images/players/harry_maquire.png",
-  "images/players/luke_shaw.png",
-  "images/players/aaron_wan-bissaka.png",
-  "images/players/paul_pogba.png",
-  "images/players/huan_mata.png",
-  "images/players/jesse_lingard.png",
-  "images/players/andreas_perreira.png",
-  "images/players/fred.png",
-  "images/players/edison_cavanni.png",
-  "images/players/anthony_martial.png",
-  "images/players/marcus_rashford.png",
-];
-var arrayPlayerName = [];
-var arrayPlayerLastName = [];
-var arrayPlayerAge = [];
-var arrayPlayerNumber = [];
-var arrayPlayerPosition = [];
+var arrayPlayer;
+var arrayPlayerCard;
+var arrayPlayerPicture;
+var arrayPlayerPictureImg;
+var arrayPlayerName;
+var arrayPlayerLastName;
+var arrayPlayerAge;
+var arrayPlayerNumber;
+var arrayPlayerPosition;
 
-var pitchPlayers;
-var subPlayers;
+var pitchPlayers = [];
+var subPlayers = [];
 
 var nameIDpitch;
 var nameIDsub;
-var randomIDpitch;
 
-var players = function (team) {
+function getRandom(arr) {
+  return Math.round(Math.random() * (arr.length - 1));
+}
+
+function swapNodes() {
+  var firstSquadPlayers = pitchPlayers.querySelectorAll(".player");
+  var substitutePlayers = subPlayers.querySelectorAll(".player");
+
+  var firstPlayer = firstSquadPlayers[getRandom(firstSquadPlayers)];
+  var substitutePlayer = substitutePlayers[getRandom(substitutePlayers)];
+
+  var n1 = firstPlayer;
+  var n2 = substitutePlayer;
+
+  var p1 = n1.parentNode;
+  var p2 = n2.parentNode;
+
+  var i1, i2;
+
+  if (!p1 || !p2 || p1.isEqualNode(n2) || p2.isEqualNode(n1)) return;
+
+  for (var i = 0; i < p1.children.length; i++) {
+    if (p1.children[i].isEqualNode(n1)) {
+      i1 = i;
+    }
+  }
+  for (var i = 0; i < p2.children.length; i++) {
+    if (p2.children[i].isEqualNode(n2)) {
+      i2 = i;
+    }
+  }
+
+  if (p1.isEqualNode(p2) && i1 < i2) {
+    i2++;
+  }
+  p1.insertBefore(n2, p1.children[i1]);
+  p2.insertBefore(n1, p2.children[i2]);
+
+  let temp = arrayPlayerCard[nameIDpitch];
+  arrayPlayerCard[nameIDpitch] = arrayPlayerCard[nameIDsub];
+  arrayPlayerCard[nameIDsub] = temp;
+}
+
+function addPlayers() {
   headerImg = document.createElement("img");
   headerImg.setAttribute("src", teamData.logo);
   document.querySelector("header").appendChild(headerImg);
 
   pitchPlayers = document.createElement("div");
-  pitchPlayers.classList.add("pitch-players");
+  pitchPlayers.setAttribute("id", "pitch-players");
   document.querySelector("main").appendChild(pitchPlayers);
 
   subPlayers = document.createElement("div");
-  subPlayers.classList.add("substitution-players");
+  subPlayers.setAttribute("id", "substitution-players");
   document.querySelector("main").appendChild(subPlayers);
 
-  for (var i = 0; i < 11; i++) {
-    arrayPlayer[i] = document.createElement("div");
-    arrayPlayer[i].classList.add("player");
-    document.querySelector(".pitch-players").appendChild(arrayPlayer[i]);
+  while (teamData.players.length) {
+    var randomPlayer = getRandom(teamData.players);
 
-    arrayPlayerCard[i] = document.createElement("div");
-    arrayPlayerCard[i].classList.add("player__card");
-    arrayPlayer[i].appendChild(arrayPlayerCard[i]);
+    var player = createPlayer(teamData.players[randomPlayer]);
+    var container = teamData.players.length > 4 ? pitchPlayers : subPlayers;
 
-    arrayPlayerPicture[i] = document.createElement("div");
-    arrayPlayerPicture[i].classList.add("player__card-img");
-    arrayPlayerCard[i].appendChild(arrayPlayerPicture[i]);
+    if (!pitchPlayers.hasChildNodes() || pitchPlayers.childNodes.length < 12)
+      container.appendChild(player);
+    else container.appendChild(player);
 
-    arrayPlayerPictureImg[i] = document.createElement("img");
-    arrayPlayerPicture[i].appendChild(arrayPlayerPictureImg[i]);
-    arrayPlayerPictureImg[i].setAttribute("src", arrayPlayerPictureImgSrc[i]);
-
-    arrayPlayerName[i] = document.createElement("p");
-    arrayPlayerName[i].classList.add("name");
-    arrayPlayerCard[i].appendChild(arrayPlayerName[i]);
-
-    arrayPlayerLastName[i] = document.createElement("p");
-    arrayPlayerLastName[i].classList.add("lastName");
-    arrayPlayerCard[i].appendChild(arrayPlayerLastName[i]);
-
-    arrayPlayerNumber[i] = document.createElement("p");
-    arrayPlayerNumber[i].classList.add("number");
-    arrayPlayerCard[i].appendChild(arrayPlayerNumber[i]);
-
-    arrayPlayerPosition[i] = document.createElement("p");
-    arrayPlayerPosition[i].classList.add("position");
-    arrayPlayerCard[i].appendChild(arrayPlayerPosition[i]);
-
-    arrayPlayerAge[i] = document.createElement("p");
-    arrayPlayerAge[i].classList.add("age");
-    arrayPlayerCard[i].appendChild(arrayPlayerAge[i]);
-
-    arrayPlayerName[i].textContent = "Name:" + " " + team.players[i].name;
-    arrayPlayerLastName[i].textContent =
-      "Last Name:" + " " + team.players[i].lastName;
-    arrayPlayerNumber[i].textContent = "Number:" + " " + team.players[i].number;
-    arrayPlayerPosition[i].textContent =
-      "Position:" + " " + team.players[i].position;
-    arrayPlayerAge[i].textContent = "Age:" + " " + team.players[i].age;
+    teamData.players.splice(randomPlayer, 1);
   }
+}
 
-  for (var i = 11; i < 15; i++) {
-    arrayPlayer[i] = document.createElement("div");
-    arrayPlayer[i].classList.add("player");
-    document.querySelector(".substitution-players").appendChild(arrayPlayer[i]);
+function createPlayer(playerData) {
+  arrayPlayer = document.createElement("div");
+  arrayPlayer.classList.add("player");
 
-    arrayPlayerCard[i] = document.createElement("div");
-    arrayPlayerCard[i].classList.add("player__card");
-    arrayPlayer[i].appendChild(arrayPlayerCard[i]);
+  arrayPlayerCard = document.createElement("div");
+  arrayPlayerCard.classList.add("player__card");
+  arrayPlayer.appendChild(arrayPlayerCard);
 
-    arrayPlayerPicture[i] = document.createElement("div");
-    arrayPlayerPicture[i].classList.add("player__card-img");
-    arrayPlayerCard[i].appendChild(arrayPlayerPicture[i]);
+  arrayPlayerPicture = document.createElement("div");
+  arrayPlayerPicture.classList.add("player__card-img");
+  arrayPlayerCard.appendChild(arrayPlayerPicture);
 
-    arrayPlayerPictureImg[i] = document.createElement("img");
-    arrayPlayerPicture[i].appendChild(arrayPlayerPictureImg[i]);
-    arrayPlayerPictureImg[i].setAttribute("src", arrayPlayerPictureImgSrc[i]);
+  arrayPlayerPictureImg = document.createElement("img");
+  arrayPlayerPicture.appendChild(arrayPlayerPictureImg);
+  arrayPlayerPictureImg.setAttribute("src", playerData.image);
 
-    arrayPlayerName[i] = document.createElement("p");
-    arrayPlayerName[i].classList.add("name");
-    arrayPlayerCard[i].appendChild(arrayPlayerName[i]);
+  arrayPlayerName = document.createElement("p");
+  arrayPlayerName.classList.add("name");
+  arrayPlayerCard.appendChild(arrayPlayerName);
 
-    arrayPlayerLastName[i] = document.createElement("p");
-    arrayPlayerLastName[i].classList.add("lastName");
-    arrayPlayerCard[i].appendChild(arrayPlayerLastName[i]);
+  arrayPlayerLastName = document.createElement("p");
+  arrayPlayerLastName.classList.add("lastName");
+  arrayPlayerCard.appendChild(arrayPlayerLastName);
 
-    arrayPlayerNumber[i] = document.createElement("p");
-    arrayPlayerNumber[i].classList.add("number");
-    arrayPlayerCard[i].appendChild(arrayPlayerNumber[i]);
+  arrayPlayerNumber = document.createElement("p");
+  arrayPlayerNumber.classList.add("number");
+  arrayPlayerCard.appendChild(arrayPlayerNumber);
 
-    arrayPlayerPosition[i] = document.createElement("p");
-    arrayPlayerPosition[i].classList.add("position");
-    arrayPlayerCard[i].appendChild(arrayPlayerPosition[i]);
+  arrayPlayerPosition = document.createElement("p");
+  arrayPlayerPosition.classList.add("position");
+  arrayPlayerCard.appendChild(arrayPlayerPosition);
 
-    arrayPlayerAge[i] = document.createElement("p");
-    arrayPlayerAge[i].classList.add("age");
-    arrayPlayerCard[i].appendChild(arrayPlayerAge[i]);
+  arrayPlayerAge = document.createElement("p");
+  arrayPlayerAge.classList.add("age");
+  arrayPlayerCard.appendChild(arrayPlayerAge);
 
-    arrayPlayerName[i].textContent = "Name:" + " " + team.players[i].name;
-    arrayPlayerLastName[i].textContent =
-      "Last Name:" + " " + team.players[i].lastName;
-    arrayPlayerNumber[i].textContent = "Number:" + " " + team.players[i].number;
-    arrayPlayerPosition[i].textContent =
-      "Position:" + " " + team.players[i].position;
-    arrayPlayerAge[i].textContent = "Age:" + " " + team.players[i].age;
-  }
+  arrayPlayerName.textContent = "Name:" + " " + playerData.name;
+  arrayPlayerLastName.textContent = "Last Name:" + " " + playerData.lastName;
+  arrayPlayerNumber.textContent = "Number:" + " " + playerData.number;
+  arrayPlayerPosition.textContent = "Position:" + " " + playerData.position;
+  arrayPlayerAge.textContent = "Age:" + " " + playerData.age;
 
-  function getRndInteger() {
-    return Math.floor(Math.random() * (15 - 11)) + 11;
-  }
+  return arrayPlayer;
+}
 
-  function swapNodes() {
-    nameIDpitch = Math.floor(Math.random() * 11);
-    nameIDsub = getRndInteger();
-
-    var n1 = arrayPlayerCard[nameIDpitch];
-    var n2 = arrayPlayerCard[nameIDsub];
-
-    var p1 = n1.parentNode;
-    var p2 = n2.parentNode;
-
-    var i1, i2;
-
-    if (!p1 || !p2 || p1.isEqualNode(n2) || p2.isEqualNode(n1)) return;
-
-    for (var i = 0; i < p1.children.length; i++) {
-      if (p1.children[i].isEqualNode(n1)) {
-        i1 = i;
-      }
-    }
-    for (var i = 0; i < p2.children.length; i++) {
-      if (p2.children[i].isEqualNode(n2)) {
-        i2 = i;
-      }
-    }
-
-    if (p1.isEqualNode(p2) && i1 < i2) {
-      i2++;
-    }
-    p1.insertBefore(n2, p1.children[i1]);
-    p2.insertBefore(n1, p2.children[i2]);
-
-    let temp = arrayPlayerCard[nameIDpitch];
-    arrayPlayerCard[nameIDpitch] = arrayPlayerCard[nameIDsub];
-    arrayPlayerCard[nameIDsub] = temp;
-  }
-
-  setInterval(() => {
-    swapNodes();
-  }, 60000);
-};
-
-players(teamData);
+addPlayers();
+setInterval(() => {
+  swapNodes();
+}, 60000);
